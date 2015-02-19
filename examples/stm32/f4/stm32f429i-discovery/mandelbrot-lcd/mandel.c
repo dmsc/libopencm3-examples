@@ -33,7 +33,7 @@
 
 /* utility functions */
 void uart_putc(char c);
-int _write(int fd, char *ptr, int len);
+int __attribute ((used)) _write(int fd, char *ptr, int len);
 
 void mandel(float, float, float);
 

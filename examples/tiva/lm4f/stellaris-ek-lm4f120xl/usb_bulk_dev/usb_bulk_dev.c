@@ -31,7 +31,7 @@
 
 #include<stdio.h>
 
-int _write(int file, char *ptr, int len);
+int __attribute ((used)) _write(int file, char *ptr, int len);
 void uart_setup(void);
 
 /* =============================================================================
