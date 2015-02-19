@@ -33,7 +33,7 @@ PREFIX		?= arm-none-eabi
 CC		:= $(PREFIX)-gcc
 CXX		:= $(PREFIX)-g++
 LD		:= $(PREFIX)-gcc
-AR		:= $(PREFIX)-ar
+AR		:= $(PREFIX)-gcc-ar
 AS		:= $(PREFIX)-as
 OBJCOPY		:= $(PREFIX)-objcopy
 OBJDUMP		:= $(PREFIX)-objdump
@@ -78,7 +78,7 @@ SCRIPT_DIR	= $(OPENCM3_DIR)/scripts
 ###############################################################################
 # C flags
 
-CFLAGS		+= -Os -g
+CFLAGS		+= -Os -g -flto
 CFLAGS		+= -Wextra -Wshadow -Wimplicit-function-declaration
 CFLAGS		+= -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes
 CFLAGS		+= -fno-common -ffunction-sections -fdata-sections
@@ -86,7 +86,7 @@ CFLAGS		+= -fno-common -ffunction-sections -fdata-sections
 ###############################################################################
 # C++ flags
 
-CXXFLAGS	+= -Os -g
+CXXFLAGS	+= -Os -g -flto
 CXXFLAGS	+= -Wextra -Wshadow -Wredundant-decls  -Weffc++
 CXXFLAGS	+= -fno-common -ffunction-sections -fdata-sections
 
@@ -100,7 +100,7 @@ CPPFLAGS	+= -I$(INCLUDE_DIR) $(DEFS)
 ###############################################################################
 # Linker flags
 
-LDFLAGS		+= --static -nostartfiles
+LDFLAGS		+= $(CFLAGS) --static -nostartfiles
 LDFLAGS		+= -L$(LIB_DIR)
 LDFLAGS		+= -T$(LDSCRIPT)
 LDFLAGS		+= -Wl,-Map=$(*).map
